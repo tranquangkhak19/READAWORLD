@@ -70,6 +70,7 @@ class Admin extends Controller
 
         $book = $model->getBookByIsbn($isbn);
 
+        //Get author name of this book
         $author_name = "NoName";
         $row=mysqli_fetch_assoc($book);
         $author_id = $row['AUTHOR_ID'];
@@ -100,13 +101,16 @@ class Admin extends Controller
         foreach($book as $attribute) {
             $bookValues[] = isset($_POST[$attribute]) ? $_POST[$attribute] : "";
         }
+        //all attributes of book is saved in $book
         $book = array_combine($book, $bookValues);
 
         //call model and update
         $model = $this->model("BookModel");
         $res = $model->updateBookByIsbn($isbn, $book);
         if($res){
-            echo $res;
+            //$_SESSION['update'] = "UPDATED SUCCESSFULLY!";
+            $url = 'UpdateBook?isbn='.$isbn;
+            header("Refresh:0; url=$url");
         }
 
     }
