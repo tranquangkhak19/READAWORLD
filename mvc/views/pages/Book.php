@@ -55,7 +55,7 @@
                   <td><?php echo $price; ?></td>
                   <td>
                     <a href="BookDetail?isbn=<?php echo $isbn; ?>" class="btn btn-sm btn-primary">Detail</a>
-                    <a href="" class="btn btn-sm btn-secondary">Update</a>
+                    <a href="UpdateBook?isbn=<?php echo $isbn; ?>" class="btn btn-sm btn-secondary">Update</a>
                     <a href="" class="btn btn-sm btn-danger">Delete</a>
                   </td>
               </tr>

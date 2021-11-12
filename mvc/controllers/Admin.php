@@ -64,6 +64,24 @@ class Admin extends Controller
         ]);
     }
 
+    public function UpdateBook($isbn)
+    {
+        $model = $this->model("BookModel");
+        $book = $model->getBookByIsbn($isbn);
+
+        $author_name = "NoName";
+        $row=mysqli_fetch_assoc($book);
+        $author_id = $row['AUTHOR_ID'];
+        $author = mysqli_fetch_assoc($model->getAuthorById($author_id));
+        $author_name = $author['ANAME'];
+
+        $this->view("AdminLayout", [
+            "page" => "UpdateBook",
+            "book" => $model->getBookByIsbn($isbn),
+            "author_name" => $author_name
+        ]);
+    }
+
 }
 
 ?>
