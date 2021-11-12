@@ -4,10 +4,10 @@
     <a class="nav-link" href="#">Home</a>
   </li>
   <li class="nav-item btn btn btn-outline-secondary mx-2">
-    <a class="nav-link" href="customer">Member</a>
+    <a class="nav-link" href="Customer">Member</a>
   </li>
   <li class="nav-item btn btn btn-outline-secondary mx-2">
-    <a class="nav-link" href="book">Book</a>
+    <a class="nav-link" href="Book">Book</a>
   </li>
   <li class="nav-item btn btn btn-outline-secondary mx-2">
     <a class="nav-link" href="#">Login</a>

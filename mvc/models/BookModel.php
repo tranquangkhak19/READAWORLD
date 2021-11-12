@@ -16,7 +16,7 @@ class BookModel extends DB
 
     public function getAuthorById($id)
     {
-        $sql = "SELECT * FROM author WHERE id='$id";
+        $sql = "SELECT * FROM author WHERE id='$id'";
         return mysqli_query($this->conn, $sql);
     }
 
