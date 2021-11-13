@@ -54,6 +54,30 @@ class BookModel extends DB
         return mysqli_query($this->conn, $sql);
     }
 
+    public function deleteBookByIsbn($isbn)
+    {
+        $sql  = "DELETE FROM book WHERE isbn='$isbn'";
+        return mysqli_query($this->conn, $sql);
+    }
+
+    public function addBook($book)
+    {
+        $isbn = $book["isbn"];
+        $title = $book["title"];
+        $author_id = $book["author_id"];
+        $publisher = $book["publisher"];
+        $description = $book["description"];
+        $image = $book["image"];
+        $price = $book["price"];
+        
+        //INSERT INTO BOOK
+        //VALUES  ('0000000000001', 'Strawberry Sunday', 100000,'Prentice Hall','AU0000001','https:.jpg', 'OKEOKEOKEOKEOKEOK');
+        $sql = "INSERT INTO book 
+                VALUES ('$isbn', '$title', $price, '$publisher', '$author_id', '$image', '$description')";
+
+        return mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
+    }
+
 
 }
 ?>

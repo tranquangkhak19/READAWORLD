@@ -112,7 +112,66 @@ class Admin extends Controller
             $url = 'UpdateBook?isbn='.$isbn;
             header("Refresh:0; url=$url");
         }
+    }
 
+    public function DeleteBook($isbn)
+    {
+        $model = $this->model("BookModel");
+        $res = $model->deleteBookByIsbn($isbn);
+        if($res){
+            //$_SESSION['delete'] = "DELETED BOOK SUCCESSFULLY!";
+            $url = 'Book';
+            header("Refresh:0; url=$url");
+        }
+    }
+
+    public function AddBook()
+    {
+        $model = $this->model("BookModel");
+
+        //Get all authors and publishers for selection in updating form
+        $authors = $model->getAllAuthors();
+        $publishers = $model->getAllPublishers();
+
+        $this->view("AdminLayout", [
+            "page" => "AddBook",
+            "authors" => $authors,
+            "publishers" => $publishers
+        ]);
+    }
+
+    public function AddBookToDB()
+    {
+        //get all book atrributes from $_POST[]
+        $book = array(  "isbn",
+                        "title",
+                        "author_id",          
+                        "publisher",          
+                        "description",
+                        "image",               
+                        "price");
+        $bookValues = array();
+        foreach($book as $attribute) {
+            $bookValues[] = isset($_POST[$attribute]) ? $_POST[$attribute] : "";
+        }
+        //all attributes of book is saved in $book
+        $book = array_combine($book, $bookValues);
+        print_r($book);
+
+        //call model and update
+        $model = $this->model("BookModel");
+        $res = $model->addBook($book);
+
+        if($res){
+            //$_SESSION['add'] = "ADDED BOOK SUCCESSFULLY!";
+            $url = 'Book';
+            header("Refresh:0; url=$url");
+        }
+        else
+        {
+            print_r($res);
+            echo "QUERY ERROR!";
+        }
     }
 
 }

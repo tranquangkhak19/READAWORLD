@@ -65,7 +65,7 @@
             </div>
             <div class="form-group">
                 <label >Description</label>
-                <textarea name="description" class="form-control" rows="3" value="<?php echo $description;?>" placeholder="<?php echo $description; ?>"></textarea>
+                <textarea name="description" class="form-control" rows="3" value="" placeholder="<?php echo $description; ?>"><?php echo $description;?></textarea>
             </div>
             <div class="form-group">
                 <label>Image</label>
