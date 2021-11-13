@@ -5,7 +5,6 @@ class BookModel extends DB
     {
         $sql = "SELECT * FROM book";
         return mysqli_query($this->conn, $sql);
-
     }
 
     public function getAllAuthors()

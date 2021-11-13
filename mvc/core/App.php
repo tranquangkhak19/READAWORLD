@@ -1,37 +1,47 @@
 <?php
-class App{
+class App
+{
     //http://localhost/EBookStore/Home/SayHi/1/2/3
     protected $controller="Home";
-    protected $action="SayHi";
+    protected $action="Show";
     protected $params=[];
 
-    function __construct(){
-       
+    function __construct()
+    {
         $arr = $this->UrlProcess();
         
-        //Handling Controller
-        if(file_exists("./mvc/controllers/".$arr[0].".php"))
+        //avoid warning "Trying to access array offset on value of type null"
+        if(!empty($arr))
         {
-            $this->controller = $arr[0];
-        }
-        unset($arr[0]);
-        require_once "./mvc/controllers/".$this->controller.".php";
-        $this->controller = new $this->controller;
-
-        //Handling Action
-        if(isset($arr[1]))
-        {
-            if(method_exists($this->controller, $arr[1]))
+            //Handling Controller
+            if(file_exists("./mvc/controllers/".$arr[0].".php"))
             {
-                $this->action = $arr[1];
+                $this->controller = $arr[0];
             }
-            unset($arr[1]);
-        }
+            unset($arr[0]);
+            require_once "./mvc/controllers/".$this->controller.".php";
+            $this->controller = new $this->controller;
 
-        //Handling Params
-        //$this->params = $arr?array_values($arr):[];
-    
-        $this->params = $this->getParams();
+            //Handling Action
+            if(isset($arr[1]))
+            {
+                if(method_exists($this->controller, $arr[1]))
+                {
+                    $this->action = $arr[1];
+                }
+                unset($arr[1]);
+            }
+
+            //Handling Params
+            //$this->params = $arr?array_values($arr):[];
+        
+            $this->params = $this->getParams();
+        }
+        else //default value of $this
+        {
+            require_once "./mvc/controllers/".$this->controller.".php";
+            $this->controller = new $this->controller;
+        }
 
         call_user_func_array([$this->controller, $this->action], $this->params);
 

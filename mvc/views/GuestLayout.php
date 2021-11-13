@@ -15,20 +15,11 @@
         <?php
             if(empty($data))
             {
-                echo 
-                '
-                    <div class="row" id="#board">
-                        <div class="col p-5 m-2 bg-primary rounded">Total Members</div>
-                        <div class="col p-5 m-2 bg-primary rounded">Total Books</div>
-                        <div class="w-100"></div>
-                        <div class="col p-5 m-2 bg-primary rounded">Total Revenue</div>
-                        <div class="col p-5 m-2 bg-primary rounded">Others</div>
-                    </div>
-                ';
+                echo "BOOKSTORE!";
             }
             else
             {
-                require_once "./mvc/views/AdminPages/".$data["page"].".php";
+                require_once "./mvc/views/GuestPages/".$data["page"].".php";
             }
         ?>
     </div>

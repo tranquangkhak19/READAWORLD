@@ -1,22 +1,16 @@
 <?php
 class Home extends Controller
 {
-    public function SayHi(){
-        $teo = $this->model("SinhVienModel");
-        echo $teo->GetSV();
-
-        //View
-    }
-
-    public function Show($a, $b)
+    public function Show()
     {
-        $tong = $this->model("SinhVienModel");
-        echo $tong->Tong($a, $b);
-        $this->view("aoxau", [
-            "Page"=>"News",
-            "Number"=>$tong, 
-            "color"=>"red",
-            "sv" => $tong->SinhVien()
+        $model = $this->model("BookModel");
+        $books = $model->getAllBooks();
+        $authors = $model->getAllAuthors();
+
+        $this->view("GuestLayout", [
+            "page" => "HomePage",
+            "books" => $books,
+            "authors" => $authors
         ]);
     }
 }
