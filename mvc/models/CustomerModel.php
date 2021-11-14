@@ -20,6 +20,23 @@ class CustomerModel extends DB
         return mysqli_query($this->conn, $sql);
     }
 
+    public function getCustomerByAccount($account)
+    {
+        if($account)
+        {
+            $username = $account['username'];
+            $password = $password = md5($account['password']);
+
+            $sql = "SELECT * FROM customer WHERE username='$username' AND pwd='$password'";
+            return mysqli_query($this->conn, $sql);
+        }
+        else
+        {
+            return False;
+        }
+        
+    }
+
     public function addCustomer($data)
     {
         // $sql = "INSERT INTO customer (ID, USERNAME, PWD, PHONE, EMAIL, FNAME, LNAME)

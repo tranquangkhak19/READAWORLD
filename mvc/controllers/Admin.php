@@ -1,7 +1,7 @@
 <?php
 class Admin extends Controller
 {
-    public function SayHi(){
+    public function Show(){
         $this->view("AdminLayout", []);
     }
 

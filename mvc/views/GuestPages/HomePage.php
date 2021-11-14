@@ -16,6 +16,9 @@
     height: 100%;
     object-fit: cover;
     }
+    .card-img-top:hover {
+        background-color: rgba(251, 251, 251, 0.2);
+    }
 </style>
 
 <div class="container">
@@ -44,19 +47,16 @@
                         '
                             <div class="col-3">
                                 <div class="card" style="width:13rem;">
-                                    <a>
-                                        <img class="card-img-top" style="height:300px; width:100%;" src="'.$image_url.'" alt="Image">
+                                    <a href="BookDetail?isbn='.$isbn.'">
+                                        <img class="card-img-top bg-image hover-zoom" style="height:300px; width:100%;" src="'.$image_url.'" alt="Image">
                                     </a>
                                     <div class="card-body">
-                                        <a href="#" style="text-decoration: none;">
+                                        <a href="BookDetail?isbn='.$isbn.'" style="text-decoration: none;">
                                             <h6 style="height:50px; text-overflow: ellipsis;" class="card-title">'.$title.'</h6>
                                         </a>
                                         <h6>Price: '.$price.' VND</h6>
                                         <div class="row">
-                                            <div class="col-4">
-                                                <a href="#" class="btn btn-danger">Buy</a>
-                                            </div>
-                                            <div class="col-8">
+                                            <div class="col-12">
                                                 <a href="#" class="btn btn-primary">Add to cart</a>
                                             </div>
                                         </div>
