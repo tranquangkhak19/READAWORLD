@@ -1,4 +1,3 @@
-
 <style>
   /* Style The Dropdown Button */
   .dropbtn {
@@ -54,7 +53,6 @@
 </style>
 
 
-
 <header class="p-3 bg-dark text-white"">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -85,6 +83,7 @@
                     $username = $_SESSION['username'];
                     echo 
                       '
+                        <a href="Cart" class="btn btn-outline-light me-2">Cart</a>
                         <div class="dropdown">
                           <button class="dropbtn btn btn-outline-light">'.$username.'</button>
                           <div class="dropdown-content text-center">

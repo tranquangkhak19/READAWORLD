@@ -64,6 +64,29 @@ class Home extends Controller
         }
     }
 
+    public function Cart()
+    {
+        if(isset($_SESSION['id']))
+        {
+            $_SESSION['id'];
+            $model = $this->model("BookModel");
+            $booksInCart = $model->getAllBooksInCartByCusID($cid);
+            $count_books = mysqli_num_rows($booksInCart);
+
+            $books = [];
+            if($count_books>0)
+            {
+                while($row=mysqli_fetch_assoc($booksInCart))
+                {
+                    $isbn = $row['ISBN'];
+                    $book = $model->getBookByIsbn($isbn);
+                }
+            {
+            
+        }
+        
+    }
+
     public function BookDetail($isbn)
     {
         $model = $this->model("BookModel");
