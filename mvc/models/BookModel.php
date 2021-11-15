@@ -79,15 +79,10 @@ class BookModel extends DB
 
     public function getAllBooksInCartByCusID($cid)
     {
-        if($cid)
-        {
-            $sql = "SELECT * FROM cart WHERE cid='$cid'";
-            return mysqli_query($this->conn, $sql) or die(mysqli_error($this->conn));
-        }
-        else
-        {
-            return False;
-        }
+
+        $sql = "SELECT * FROM cart WHERE CID='$cid'";
+        return mysqli_query($this->conn, $sql);
+
     }
 
 
