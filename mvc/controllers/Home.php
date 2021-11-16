@@ -73,28 +73,46 @@ class Home extends Controller
 
             $booksInCart = $model->getAllBooksInCartByCusID($cid);
             $count_books = mysqli_num_rows($booksInCart);
-            echo " ".$count_books." ";
+            //echo " ".$count_books." ";
+
+            //Save all books information in cart
             $books = [];
             if($count_books>0)
             {
                 while($row=mysqli_fetch_assoc($booksInCart))
                 {
                     $isbn = $row['ISBN'];
-                    echo $isbn;
-                    // $resbook = $model->getBookByIsbn($isbn);
-                    // if($resbook)
-                    // {
-                    //     $book=mysqli_fetch_assoc($resbook)
-                    //     $isbn = $book['ISBN'];
-                    //     $price = $book['PRICE'];
-                    //     $image = $book['IMAGE_URL'];
+                    $quantity = $row['QUANTITY'];
+                    //echo $isbn;
+                    $resbook = $model->getBookByIsbn($isbn);
 
-                    // }
-                    
+                    if($resbook)
+                    {
+                        $bookInfo=mysqli_fetch_assoc($resbook);
+                        $isbn = $bookInfo['ISBN'];
+                        $title = $bookInfo['TITLE'];
+                        $price = $bookInfo['PRICE'];
+                        $image = $bookInfo['IMAGE_URL'];
+
+                        $book = array(
+                            "isbn" => $isbn,
+                            "title" => $title,
+                            "image" => $image,
+                            "price" => $price,
+                            "quantity" => $quantity,
+                        );
+                        
+                        array_push($books, $book);
+                    }
                 }
             }
+
+            $this->view("GuestLayout", [
+                "page" => "Cart",
+                "books" => $books
+            ]);
+
         }
-            
     }
         
     
