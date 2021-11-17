@@ -27,7 +27,7 @@
       <div class="row"><p>Publisher: <?php echo $publisher; ?></p></div>
       <div class="row"><p>Desciption: <?php echo $description; ?></p></div>
       <div class="row"><p>Price: <?php echo $price; ?> VND</p></div>
-      <a href="UpdateBook?isbn=<?php echo $isbn;?>" class="btn btn-secondary">Update</a>
+      <a href="UpdateBook?isbn=<?php echo $isbn;?>" class="btn btn-secondary"><i class="fas fa-edit"></i> Update</a>
     </div>
   </div>
 </div>

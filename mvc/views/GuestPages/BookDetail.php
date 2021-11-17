@@ -32,7 +32,7 @@
                 <h3 class="text-danger"><?php echo $price; ?> VND</h3>
             </p>
         </div>
-      <a href="UpdateBook?isbn=<?php echo $isbn;?>" class="btn btn-danger">Buy Now</a>
+      <a href="UpdateBook?isbn=<?php echo $isbn;?>" class="btn btn-danger"><i class="fas fa-cart-plus"></i> Buy Now</a>
     </div>
   </div>
 </div>

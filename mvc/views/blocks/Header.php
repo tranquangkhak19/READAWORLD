@@ -57,6 +57,9 @@
   }
 
 </style>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
 
 
 <header class="p-3 bg-dark text-white"">
@@ -84,12 +87,12 @@
                     $username = $_SESSION['username'];
                     echo 
                       '
-                        <a href="Cart" class="btn btn-outline-light me-2">Cart</a>
+                        <a href="Cart" class="btn btn-outline-light me-2"><i class="fas fa-shopping-cart"></i></a>
                         <div class="dropdown">
-                          <button class="dropbtn btn btn-outline-light">'.$username.'</button>
+                          <button class="dropbtn btn btn-outline-light"><i class="fas fa-user"></i> '.$username.'</button>
                           <div class="dropdown-content text-center">
                             <a href="Customer?id='.$id.'">My Account</a>
-                            <a href="Logout">Logout</a>
+                            <a href="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                           </div>
                         </div>
                       ';
@@ -98,8 +101,8 @@
                 {
                   echo
                     '
-                      <a href="Login" class="btn btn-outline-light me-2">Login</a>
-                      <a href="SignUp" class="btn btn-warning">Sign up</a>
+                      <a href="Login" class="btn btn-outline-light me-2"><i class="fas fa-sign-in-alt"></i> Login</a>
+                      <a href="SignUp" class="btn btn-warning"><i class="fas fa-user-plus"></i> Sign up</a>
                     ';
                 }
               ?>

@@ -7,9 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../public/css/style.css">
-    <title>Admin</title>
+    <title>READAWORLD</title>
 </head>
-<body>
+<body class="m-0">
     <?php require_once "./mvc/views/blocks/Header.php";?>
     <div class="m-3">
         

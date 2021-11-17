@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../public/css/style.css">
     <title>Admin</title>
 </head>
-<body>
+<body class="m-0">
     <?php require_once "./mvc/views/blocks/Header.php";?>
         <div class="container mx-auto mt-5 p-3 bg-light border border-dark rounded" style="width: 500px;"">
             <h1 class="text-center">Login</h1>

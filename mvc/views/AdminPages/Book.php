@@ -1,7 +1,7 @@
 <div class="container">
   <h1>List of Books</h1>
   <div>
-    <a href="AddBook"  class="btn btn-success" >Add Book</a>
+    <a href="AddBook"  class="btn btn-success" ><i class="fas fa-plus-square"></i> Add Book</a>
   </div>
 
   <table id="cusTable" class="table">
@@ -56,7 +56,7 @@
                   <td>
                     <a href="BookDetail?isbn=<?php echo $isbn; ?>" class="btn btn-sm btn-primary">Detail</a>
                     <a href="UpdateBook?isbn=<?php echo $isbn; ?>" class="btn btn-sm btn-secondary">Update</a>
-                    <a href="DeleteBook?isbn=<?php echo $isbn; ?>" class="btn btn-sm btn-danger">Delete</a>
+                    <a href="DeleteBook?isbn=<?php echo $isbn; ?>" class="btn btn-sm btn-danger my-1"><i class="fas fa-trash-alt"></i></a>
                   </td>
               </tr>
 

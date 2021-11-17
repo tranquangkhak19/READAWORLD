@@ -57,7 +57,7 @@
                                         <h6>Price: '.$price.' VND</h6>
                                         <div class="row">
                                             <div class="col-12">
-                                                <a href="#" class="btn btn-primary">Add to cart</a>
+                                                <a href="#" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Add to cart</a>
                                             </div>
                                         </div>
                                     </div>
