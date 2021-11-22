@@ -21,9 +21,11 @@
     }
 </style>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-2">Filter</div>
+        <div class="col-2">
+            <?php require_once "./mvc/views/blocks/Filter.php";?>
+        </div>
         <div class="col-10">
             <?php
             while($count_rows <= $num_rows)
@@ -46,7 +48,7 @@
                         echo
                         '
                             <div class="col-3">
-                                <div class="card" style="width:13rem;">
+                                <div class="card" style="width:14rem;">
                                     <a href="BookDetail?isbn='.$isbn.'">
                                         <img class="card-img-top bg-image hover-zoom" style="height:300px; width:100%;" src="'.$image_url.'" alt="Image">
                                     </a>

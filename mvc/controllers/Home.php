@@ -5,12 +5,17 @@ class Home extends Controller
     {
         $model = $this->model("BookModel");
         $books = $model->getAllBooks();
-        $authors = $model->getAllAuthors();
 
         $this->view("GuestLayout", [
             "page" => "HomePage",
-            "books" => $books,
-            "authors" => $authors
+            "books" => $books
+        ]);
+    }
+
+    public function Signup()
+    {
+        $this->view("GuestLayout", [
+            "page" => "SignUp",
         ]);
     }
 
@@ -114,9 +119,7 @@ class Home extends Controller
 
         }
     }
-        
     
-
     public function BookDetail($isbn)
     {
         $model = $this->model("BookModel");
@@ -132,6 +135,28 @@ class Home extends Controller
             "page" => "BookDetail",
             "book" => $model->getBookByIsbn($isbn),
             "author_name" => $author_name
+        ]);
+    }
+
+    public function ApplyFilter()
+    {
+        //default 0<=price<=1billion (VND)
+        $minPrice = $_POST['minPrice']?$_POST['minPrice']:0;
+        $maxPrice = $_POST['maxPrice']?$_POST['maxPrice']:1000000000;
+        $price = array(
+            'min' => $minPrice,
+            'max' => $maxPrice,
+        );
+
+        $categories = $_POST['categories'];
+        //print_r($categories);
+        $model = $this->model("BookModel");
+
+        $books = $model->filterByPricesAndCategories($price, $categories);
+
+        $this->view("GuestLayout", [
+            "page" => "HomePage",
+            "books" => $books
         ]);
     }
 

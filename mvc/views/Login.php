@@ -12,7 +12,7 @@
 <body class="m-0">
     <?php require_once "./mvc/views/blocks/Header.php";?>
         <div class="container mx-auto mt-5 p-3 bg-light border border-dark rounded" style="width: 500px;"">
-            <h1 class="text-center">Login</h1>
+            <h1 class="text-center">LOGIN</h1>
 
             <br>
             <?php
@@ -42,39 +42,9 @@
                     <input type="submit" name="submit" value="Login" class="btn btn-primary">
                 </div>
             </form>
-
             <!-- Login form ends here -->
     </div>
 
     <?php require_once "./mvc/views/blocks/Footer.php";?>
 </body>
 </html>
-
-
-<?PHP
-    // //Check wheter the submit button is clicked or not
-    // if(isset($_POST['submit']))
-    // {
-    //     //Process for Login
-
-    //     //1. Get data from Login form
-    //     $username = $_POST['username'];
-    //     $password = md5($_POST['password']);
-
-    //     //2. SQL to check if the username already exists or not
-    //     $sql_checkUser = "SELECT * FROM tbl_admin WHERE username='$username' AND password='$password'";
-    //     $res_checkUser = mysqli_query($conn, $sql_checkUser);
-    //     $checkUser = mysqli_num_rows($res_checkUser);
-    //     if($checkUser==1)
-    //     {
-    //         $_SESSION['login'] = "<div class='success'>Login Successfully!</div>";
-    //         $_SESSION['user'] = $username;
-    //         header('location:'.SITEURL.'admin/');
-    //     }
-    //     else
-    //     {
-    //         $_SESSION['login'] = "<div class='error text-center'>Username or password is not match!</div>";
-    //         header('location:'.SITEURL.'admin/login.php');
-    //     }
-    //}
-?>

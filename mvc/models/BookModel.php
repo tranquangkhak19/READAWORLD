@@ -85,6 +85,68 @@ class BookModel extends DB
 
     }
 
+    public function getISBNsByPrices($min, $max)
+    {
+        $sql = "SELECT ISBN FROM book WHERE PRICE>=$min AND PRICE<=$max;";
+        return mysqli_query($this->conn, $sql);
+    }
 
+    public function getBooksByCategory($category)
+    {
+        $sql = "SELECT ISBN FROM book_field WHERE BFIELD='$category';";
+        return mysqli_query($this->conn, $sql);
+    }
+
+    public function filterByPricesAndCategories($price, $category)
+    {
+        $sql="";
+        $sql1="";
+        $sql2="";
+
+        if($price)
+        {
+            $min = $price['min'];
+            $max = $price['max'];
+            $sql1 .= "SELECT ISBN FROM book WHERE PRICE>=$min AND PRICE<=$max";
+        }
+        if($category)
+        {   
+            $sql2 .= "SELECT ISBN FROM book_field WHERE";
+            for($i=0; $i<count($category); $i++)
+            {
+                $cate = $category[$i];
+                if($i==(count($category)-1))
+                {
+                    $sql2 .= " BFIELD='$cate'";
+                }
+                else
+                {
+                    $sql2 .= " BFIELD='$cate' AND";   
+                }
+            }
+        }
+        if($sql1!="" && $sql2!="")
+        {
+            $sql = "SELECT table1.ISBN FROM (".$sql1.") AS table1 INNER JOIN (".$sql2.") AS table2 ON table1.ISBN=table2.ISBN";   
+        }
+        elseif($sql1=="")
+        {
+            $sql = $sql2;
+        }
+        elseif($sql2=="")
+        {
+            $sql = $sql1;
+        }
+        else
+        {
+            $sql = "";
+        }
+
+        //JOIN with book table
+        $finalSQL = "SELECT book.* FROM book INNER JOIN (".$sql.") AS table0 ON book.ISBN=table0.ISBN;";
+        return mysqli_query($this->conn, $finalSQL);
+    }
 }
+
+
 ?>
