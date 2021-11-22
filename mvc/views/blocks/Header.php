@@ -59,6 +59,7 @@
 </style>
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 
 
@@ -75,7 +76,7 @@
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                <input type="search" name="search_name" id="search_name" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
             </form>
 
             <div class="text-end">
@@ -112,3 +113,30 @@
     </div>
 </header>
 
+<ul class="list-group" id="output_search">
+</ul>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var action = "Search";
+		$("#search_name").keyup(function(){
+			var search_name = $("#search_name").val();
+			if ($("#search_name").val() != '') 
+      {
+        $.ajax({
+          url:"Search",
+          method:"POST",
+          data:{action:action,search_name:search_name},
+          success:function(data){
+            $("#list-books").html(data);
+          }
+        });
+			}
+			else
+      {
+
+			}
+
+		});
+	});
+</script>

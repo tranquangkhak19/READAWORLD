@@ -146,6 +146,14 @@ class BookModel extends DB
         $finalSQL = "SELECT book.* FROM book INNER JOIN (".$sql.") AS table0 ON book.ISBN=table0.ISBN;";
         return mysqli_query($this->conn, $finalSQL);
     }
+
+
+
+    public function Search($name){
+        #$sql ="SELECT * FROM book WHERE TITLE LIKE '%$name%' order by ISBN DESC";
+        $sql ="SELECT * FROM book WHERE TITLE LIKE '%$name%';";
+        return mysqli_query($this->conn, $sql);
+    }
 }
 
 

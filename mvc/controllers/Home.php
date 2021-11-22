@@ -148,7 +148,14 @@ class Home extends Controller
             'max' => $maxPrice,
         );
 
-        $categories = $_POST['categories'];
+        if(!empty($_POST["categories"]))
+        {
+            $categories = $_POST['categories'];
+        }
+        else
+        {
+            $categories = NULL;
+        }
         //print_r($categories);
         $model = $this->model("BookModel");
 
@@ -158,6 +165,23 @@ class Home extends Controller
             "page" => "HomePage",
             "books" => $books
         ]);
+    }
+    
+
+
+    public function Search(){
+
+        $search_model = $this->model("BookModel");
+        if (isset($_POST["action"])) {
+            
+            $search_name = $_POST["search_name"];
+
+            $books = $search_model->Search($search_name);
+            $this->view("NoLayout", [
+                "page" => "HomePage",
+                "books" => $books
+            ]);
+        }
     }
 
 }
