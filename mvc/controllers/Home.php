@@ -133,7 +133,7 @@ class Home extends Controller
         $isbn = $_POST['isbn'];
         $quantity = $_POST['quantity'];
 
-        echo $cusID."---".$isbn."---".$quantity."<br>";
+        //echo $cusID."---".$isbn."---".$quantity."<br>";
         $model = $this->model("BookModel");
 
         $resGetBook = $model->getBookOnCartByISBN($cusID, $isbn);
@@ -154,6 +154,29 @@ class Home extends Controller
         else
         {
             echo "ERROR ADD TO CART!!!";
+        }
+    }
+
+    public function UpdateBookQuantityInCart()
+    {
+        $cusID = $_SESSION['id'];
+        $isbn = $_POST['isbn'];
+        $quantity = $_POST['quantity'];
+        echo $cusID."---".$isbn."---".$quantity."<br>";
+
+        $model = $this->model("BookModel");
+
+        $resGetBook = $model->getBookOnCartByISBN($cusID, $isbn);
+        $numBook = mysqli_num_rows($resGetBook);
+
+        if($numBook==1)
+        {
+            echo "UPDATE <br>";
+            $resUpdateQuantity = $model->replaceQuantityBookInCart($cusID, $isbn, $quantity);
+        }
+        else
+        {
+            echo "FAILED TO UPDATE QUANTITY OF BOOK IN CART!";
         }
     }
     

@@ -114,8 +114,6 @@
     </div>
 </header>
 
-<ul class="list-group" id="output_search">
-</ul>
 
 <script type="text/javascript">
 	$(document).ready(function(){

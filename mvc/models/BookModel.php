@@ -168,6 +168,12 @@ class BookModel extends DB
         $sql = "UPDATE CART SET QUANTITY = QUANTITY + $quantity WHERE CID='$cusID' AND ISBN='$isbn';";
         return mysqli_query($this->conn, $sql);
     }
+
+    public function replaceQuantityBookInCart($cusID, $isbn, $quantity)
+    {
+        $sql = "UPDATE CART SET QUANTITY = $quantity WHERE CID='$cusID' AND ISBN='$isbn';";
+        return mysqli_query($this->conn, $sql);
+    }
 }
 
 
