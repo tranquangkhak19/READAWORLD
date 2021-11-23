@@ -11,18 +11,23 @@
 </head>
 <body class="m-0">
     <?php require_once "./mvc/views/blocks/Header.php";?>
-    <div class="container mt-3">
+    <div class="container-fluid mt-3">
         <div class="row">
-            <?php
-                if(empty($data))
-                {
-                    echo "BOOKSTORE!";
-                }
-                else
-                {
-                    require_once "./mvc/views/GuestPages/".$data["page"].".php";
-                }
-            ?>
+            <div class="col-2" id="filter">
+                <?php require_once "./mvc/views/blocks/Filter.php";?>
+            </div>
+            <div class="col-10" id="list-books">
+                <?php
+                    if(empty($data))
+                    {
+                        echo "BOOKSTORE!";
+                    }
+                    else
+                    {
+                        require_once "./mvc/views/GuestPages/".$data["page"].".php";
+                    }
+                ?>
+            </div>
         </div>
             
     </div>

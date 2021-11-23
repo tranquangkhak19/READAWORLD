@@ -6,7 +6,7 @@ class Home extends Controller
         $model = $this->model("BookModel");
         $books = $model->getAllBooks();
 
-        $this->view("GuestLayout", [
+        $this->view("HomeLayout", [
             "page" => "HomePage",
             "books" => $books
         ]);
@@ -45,11 +45,12 @@ class Home extends Controller
         print_r($account);
 
         //call model and update
-        $model = $this->model("CustomerModel");
-        $res = $model->getCustomerByAccount($account);
+        $cusModel = $this->model("CustomerModel");
+        $res = $cusModel->getCustomerByAccount($account);
         //print_r($res);
 
         $checkCustomer = mysqli_num_rows($res);
+
 
         if($checkCustomer==1)
         {
@@ -57,6 +58,12 @@ class Home extends Controller
             $_SESSION['login'] = "<div class='text-successs'>LOGIN SUCCESSFULLY!</div>";
             $_SESSION['id'] = $customer['ID'];
             $_SESSION['username'] = $customer['USERNAME'];
+
+            //Number of books in your Cart
+            $bookModel = $this->model("BookModel");
+            $resBooksInCart = $bookModel->getAllBooksInCartByCusID($customer['ID']);
+            $numBooksInCart = mysqli_num_rows($resBooksInCart);
+            $_SESSION['numbooks'] = $numBooksInCart;
 
             // $url = 'Show';
             // header("Refresh:0; url=$url");
@@ -119,6 +126,36 @@ class Home extends Controller
 
         }
     }
+
+    public function AddToCart()
+    {
+        $cusID = $_SESSION['id'];
+        $isbn = $_POST['isbn'];
+        $quantity = $_POST['quantity'];
+
+        echo $cusID."---".$isbn."---".$quantity."<br>";
+        $model = $this->model("BookModel");
+
+        $resGetBook = $model->getBookOnCartByISBN($cusID, $isbn);
+        $numBook = mysqli_num_rows($resGetBook);
+
+        if($numBook==1)
+        {
+            echo "UPDATE <br>";
+            $resUpdateQuantity = $model->updateQuantityBookInCart($cusID, $isbn, $quantity);
+        }
+        elseif($numBook==0)
+        {
+            echo "INSERT <br>";
+            $resAddToCart = $model->addBookToCart($cusID, $isbn, $quantity);
+            //Update SESSION to display Cart icon on header
+            $_SESSION['numbooks'] += 1;
+        }
+        else
+        {
+            echo "ERROR ADD TO CART!!!";
+        }
+    }
     
     public function BookDetail($isbn)
     {
@@ -161,7 +198,7 @@ class Home extends Controller
 
         $books = $model->filterByPricesAndCategories($price, $categories);
 
-        $this->view("GuestLayout", [
+        $this->view("HomeLayout", [
             "page" => "HomePage",
             "books" => $books
         ]);
@@ -170,7 +207,6 @@ class Home extends Controller
 
 
     public function Search(){
-
         $search_model = $this->model("BookModel");
         if (isset($_POST["action"])) {
             

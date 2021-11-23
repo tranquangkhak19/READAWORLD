@@ -22,6 +22,7 @@
     </div>
 
     <div class="col-8">
+        <div class="row d-none" id="isbn"><?php echo $isbn; ?></div>
         <div class="row"><h2><?php echo $title; ?></h2></div>
         <div class="row"><p>Author: <?php echo $author_name; ?></p></div>
         <div class="row"><p>Publisher: <?php echo $publisher; ?></p></div>
@@ -32,7 +33,36 @@
                 <h3 class="text-danger"><?php echo $price; ?> VND</h3>
             </p>
         </div>
-      <a href="UpdateBook?isbn=<?php echo $isbn;?>" class="btn btn-danger"><i class="fas fa-cart-plus"></i> Buy Now</a>
+        <div class="row mt-3 mb-5">
+          <div class="col-2">
+            <p>Quantity:</p>
+          </div>
+          <div class="col-2">
+            <input type="number" name="quantity" id="quantity" class="form-control" value="1" placeholder="1" min=0></input>
+          </div>
+          
+        </div>
+
+        <a href="" class="btn btn-danger" id="btn_add_to_cart"><i class="fas fa-cart-plus"></i> Add To Cart</a>
+      
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#btn_add_to_cart").click(function(){
+      var isbn = $("#isbn").text();
+      var quantity = $("#quantity").val();
+
+      $.ajax({
+      url:"AddToCart",
+      method:"POST",
+      data:{isbn:isbn,quantity:quantity},
+      success:function(data){
+        alert("Value of div is: " + data); 
+      }
+      });
+		});
+	});
+</script>

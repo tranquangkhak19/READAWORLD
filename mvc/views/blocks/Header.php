@@ -86,9 +86,10 @@
                 {
                     $id = $_SESSION['id'];
                     $username = $_SESSION['username'];
+                    $numbooks = $_SESSION['numbooks'];
                     echo 
                       '
-                        <a href="Cart" class="btn btn-outline-light me-2"><i class="fas fa-shopping-cart"></i></a>
+                        <a href="Cart" class="btn btn-outline-light me-2"><i class="fas fa-shopping-cart"></i> ('.$numbooks.')</a>
                         <div class="dropdown">
                           <button class="dropbtn btn btn-outline-light"><i class="fas fa-user"></i> '.$username.'</button>
                           <div class="dropdown-content text-center">

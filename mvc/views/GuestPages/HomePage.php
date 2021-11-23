@@ -51,11 +51,6 @@
                                     <h6 style="height:50px; text-overflow: ellipsis;" class="card-title">'.$title.'</h6>
                                 </a>
                                 <h6>Price: '.$price.' VND</h6>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <a href="#" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Add to cart</a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -66,3 +61,5 @@
         $count_rows++;
     }
 ?>
+
+
