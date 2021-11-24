@@ -60,8 +60,8 @@ class Home extends Controller
             $_SESSION['username'] = $customer['USERNAME'];
 
             //Number of books in your Cart
-            $bookModel = $this->model("BookModel");
-            $resBooksInCart = $bookModel->getAllBooksInCartByCusID($customer['ID']);
+            $cartModel = $this->model("CartModel");
+            $resBooksInCart = $cartModel->getAllBooksInCartByCusID($customer['ID']);
             $numBooksInCart = mysqli_num_rows($resBooksInCart);
             $_SESSION['numbooks'] = $numBooksInCart;
 
@@ -82,8 +82,9 @@ class Home extends Controller
         {
             $cid = $_SESSION['id'];
             $model = $this->model("BookModel");
+            $cartModel = $this->model("CartModel");
 
-            $booksInCart = $model->getAllBooksInCartByCusID($cid);
+            $booksInCart = $cartModel->getAllBooksInCartByCusID($cid);
             $count_books = mysqli_num_rows($booksInCart);
             //echo " ".$count_books." ";
 
@@ -134,20 +135,20 @@ class Home extends Controller
         $quantity = $_POST['quantity'];
 
         //echo $cusID."---".$isbn."---".$quantity."<br>";
-        $model = $this->model("BookModel");
+        $cartModel = $this->model("CartModel");
 
-        $resGetBook = $model->getBookOnCartByISBN($cusID, $isbn);
+        $resGetBook = $cartModel->getBookOnCartByISBN($cusID, $isbn);
         $numBook = mysqli_num_rows($resGetBook);
 
         if($numBook==1)
         {
             echo "UPDATE <br>";
-            $resUpdateQuantity = $model->updateQuantityBookInCart($cusID, $isbn, $quantity);
+            $resUpdateQuantity = $cartModel->updateQuantityBookInCart($cusID, $isbn, $quantity);
         }
         elseif($numBook==0)
         {
             echo "INSERT <br>";
-            $resAddToCart = $model->addBookToCart($cusID, $isbn, $quantity);
+            $resAddToCart = $cartModel->addBookToCart($cusID, $isbn, $quantity);
             //Update SESSION to display Cart icon on header
             $_SESSION['numbooks'] += 1;
         }
@@ -162,22 +163,30 @@ class Home extends Controller
         $cusID = $_SESSION['id'];
         $isbn = $_POST['isbn'];
         $quantity = $_POST['quantity'];
-        echo $cusID."---".$isbn."---".$quantity."<br>";
 
-        $model = $this->model("BookModel");
+        $cartModel = $this->model("CartModel");
 
-        $resGetBook = $model->getBookOnCartByISBN($cusID, $isbn);
+        $resGetBook = $cartModel->getBookOnCartByISBN($cusID, $isbn);
         $numBook = mysqli_num_rows($resGetBook);
 
         if($numBook==1)
         {
             echo "UPDATE <br>";
-            $resUpdateQuantity = $model->replaceQuantityBookInCart($cusID, $isbn, $quantity);
+            $resUpdateQuantity = $cartModel->replaceQuantityBookInCart($cusID, $isbn, $quantity);
         }
         else
         {
             echo "FAILED TO UPDATE QUANTITY OF BOOK IN CART!";
         }
+    }
+
+    public function DeleteBookInCart()
+    {
+        $cusID = $_SESSION['id'];
+        $isbn = $_POST['isbn'];
+
+        $cartModel = $this->model("CartModel");
+        $resDeleteBookInCart = $cartModel->deleteBookByCusIDAndISBN($cusID, $isbn);
     }
     
     public function BookDetail($isbn)

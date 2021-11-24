@@ -38,7 +38,7 @@
             <p>Quantity:</p>
           </div>
           <div class="col-2">
-            <input type="number" name="quantity" id="quantity" class="form-control" value="1" placeholder="1" min=0></input>
+            <input type="number" name="quantity" id="quantity" class="form-control" value="1" placeholder="1" min=1></input>
           </div>
           
         </div>
@@ -56,12 +56,12 @@
       var quantity = $("#quantity").val();
 
       $.ajax({
-      url:"AddToCart",
-      method:"POST",
-      data:{isbn:isbn,quantity:quantity},
-      success:function(data){
-        alert("Value of div is: " + data); 
-      }
+        url:"AddToCart",
+        method:"POST",
+        data:{isbn:isbn,quantity:quantity},
+        success:function(data){
+          
+        }
       });
 		});
 	});
