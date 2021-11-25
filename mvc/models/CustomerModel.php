@@ -20,7 +20,7 @@ class CustomerModel extends DB
         return mysqli_query($this->conn, $sql);
     }
 
-    public function getCustomerByAccount($account)
+    public function getCustomerByAccount($account)//username and password
     {
         if($account)
         {
@@ -37,10 +37,26 @@ class CustomerModel extends DB
         
     }
 
+    public function getMaxCusID()
+    {
+        $sql = "SELECT MAX(ID) FROM customer;";
+        return mysqli_query($this->conn, $sql);
+    }
+
     public function addCustomer($data)
     {
-        // $sql = "INSERT INTO customer (ID, USERNAME, PWD, PHONE, EMAIL, FNAME, LNAME)
-        // VALUES ($data['id'], $data['username'], $data['password'], $data['phone'], $data['email'], $data['fname'], $data['lname'])";
+        $id = $data['id'];
+        $username = $data['username_signup'];
+        $password = md5($data['password_signup']);
+        $phone = $data['phone_signup'];
+        $email = $data['email_signup'];
+        $fname = $data['firstname_signup'];
+        $lname = $data['lastname_signup'];
+
+        $sql = "INSERT INTO customer (ID, USERNAME, PWD, PHONE, EMAIL, FNAME, LNAME)
+        VALUES ('$id', '$username', '$password', '$phone', '$email', '$fname', '$lname');";
+        return mysqli_query($this->conn, $sql);
     }
+
 }
 ?>
