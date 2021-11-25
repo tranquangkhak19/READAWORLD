@@ -74,7 +74,7 @@
             var lastname_signup = $("#lastname_signup").val();
             var phone_signup = $("#phone_signup").val();
 
-            //console.log(username_signup, password_signup, email_signup, phone_signup, "---", form_signup, "---");
+            //console.log(username_signup, password_signup, email_signup, firstname_signup, lastname_signup, phone_signup);
 
             if(validateEmail(email_signup) && username_signup && password_signup)
             {
@@ -82,9 +82,9 @@
                 $.ajax({
                     url:"AddCustomerToDB",
                     method:"POST",
-                    data:{username_signup:username_signup, password_signup:password_signup,email_signup:email_signup,
-                        firstname_signup:firstname_signup, lastname_signup:lasttname_signup, phone_signup:phone_signup},
-                    success:function(data){
+                    data:{username_signup:username_signup, password_signup:password_signup, email_signup:email_signup,
+                        firstname_signup:firstname_signup, lastname_signup:lastname_signup, phone_signup:phone_signup},
+                    success:function(){
                         alert("SIGNED UP SUCCESSFULLY!");
                     }
                 });

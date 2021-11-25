@@ -57,6 +57,5 @@ class CustomerModel extends DB
         VALUES ('$id', '$username', '$password', '$phone', '$email', '$fname', '$lname');";
         return mysqli_query($this->conn, $sql);
     }
-
 }
 ?>

@@ -54,10 +54,12 @@ class Home extends Controller
         //all attributes of customer is saved in array $customer
         $customer = array_combine($customer, $customerValues);
         $customer["id"] = $this->HandleCustomerID();
-        //print_r($customer);
+        print_r($customer);
         if($customer["id"]=="" || $customer["username_signup"]=="" || $customer["password_signup"] || $customer["email_signup"])
         {
             echo "ERROR SIGNUP!!!";
+            $customerModel = $this->model("CustomerModel");
+            $resAddCustomerToDB = $customerModel->addCustomer($customer);
             return False;
         }
         else
