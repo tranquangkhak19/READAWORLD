@@ -81,9 +81,7 @@ class Home extends Controller
             {
                 $_SESSION['signup'] = "USERNAME IS DUPLICATED. PLEASE, TRY ANOTHER USERNAME!";
             }
-            
         }
-
     }
 
     public function Login()
@@ -134,6 +132,21 @@ class Home extends Controller
         {
             $_SESSION['login'] = "<div class='text-danger'>LOGIN FAILED!</div>";
             header('Location:Login');
+        }
+    }
+
+    public function Account()
+    {
+        if(isset($_SESSION['id']))
+        {
+            $cid = $_SESSION['id'];
+            $customerModel = $this->model("CustomerModel");
+            $resCustomer = $customerModel->getCustomeById($cid);
+            $customer = mysqli_fetch_assoc($resCustomer);
+            $this->view("GuestLayout", [
+                "page" => "Account",
+                "customer" => $customer
+            ]);
         }
     }
 

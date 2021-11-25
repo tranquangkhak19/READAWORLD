@@ -96,7 +96,7 @@
                         <div class="dropdown">
                           <button class="dropbtn btn btn-outline-light"><i class="fas fa-user"></i> '.$username.'</button>
                           <div class="dropdown-content text-center">
-                            <a href="Customer?id='.$id.'">My Account</a>
+                            <a href="Account">My Account</a>
                             <a href="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                           </div>
                         </div>
