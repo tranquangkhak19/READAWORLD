@@ -1,15 +1,15 @@
 <div class="container mx-auto mt-5 p-3 bg-light border border-dark rounded" style="width: 60%;"">
     <h1 class="text-center">SIGN UP</h1>
 
-    <br>
-    <?php
-        if(isset($_SESSION['login']))
-        {
-            echo $_SESSION['login'];
-            unset($_SESSION['login']);
-        }
-    ?>
-    <br>
+    <h6 class="text-danger my-4">
+        <?php
+            if(isset($_SESSION['signup']))
+            {
+                echo $_SESSION['signup'];
+                unset($_SESSION['signup']);
+            }
+        ?>
+    </h6>
 
     <!-- Login form starts here -->
     <form method="POST" action="#" id="form_signup">
@@ -83,17 +83,28 @@
                     url:"AddCustomerToDB",
                     method:"POST",
                     data:{username_signup:username_signup, password_signup:password_signup, email_signup:email_signup,
-                        firstname_signup:firstname_signup, lastname_signup:lastname_signup, phone_signup:phone_signup},
-                    success:function(){
-                        alert("SIGNED UP SUCCESSFULLY!");
-                    }
+                        firstname_signup:firstname_signup, lastname_signup:lastname_signup, phone_signup:phone_signup}
+                    // success:function(){
+                        
+                    //     // if(session_signup )
+                    //     // {
+                    //     //     console.log(session_signup);
+                    //     //     alert("SIGN UP SUCCESSFULLY!");
+                    //     //     window.location.href = "Login";
+                    //     // }
+                    //     // else
+                    //     {
+                    //         console.log("---", session_signup, "---");
+                    //         alert("FAILED TO SIGN UP!");
+                    //     }
+                    // }
                 });
             }
             else
             {
-                console.log("RETRY YOUR INPUT!");
+                alert("FAILED TO SIGN UP!");
+                <?php $_SESSION['signup'] = "FAILED TO SIGN UP. PLEASE, CHECK YOUR EMAIL AGAIN!"; ?>
             }
-            
 		});
 	});
 </script>

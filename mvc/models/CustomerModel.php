@@ -43,6 +43,12 @@ class CustomerModel extends DB
         return mysqli_query($this->conn, $sql);
     }
 
+    public function getCustomerByUsername($username)
+    {
+        $sql = "SELECT * FROM customer WHERE username='$username';";
+        return mysqli_query($this->conn, $sql);
+    }
+
     public function addCustomer($data)
     {
         $id = $data['id'];

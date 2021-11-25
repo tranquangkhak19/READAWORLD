@@ -54,26 +54,34 @@ class Home extends Controller
         //all attributes of customer is saved in array $customer
         $customer = array_combine($customer, $customerValues);
         $customer["id"] = $this->HandleCustomerID();
-        print_r($customer);
-        if($customer["id"]=="" || $customer["username_signup"]=="" || $customer["password_signup"] || $customer["email_signup"])
+        //print_r($customer);
+
+        if($customer["id"]=="" || $customer["username_signup"]=="" || $customer["password_signup"]=="" || $customer["email_signup"]=="")
         {
-            echo "ERROR SIGNUP!!!";
-            $customerModel = $this->model("CustomerModel");
-            $resAddCustomerToDB = $customerModel->addCustomer($customer);
-            return False;
+            $_SESSION['signup'] = "FAILED TO SIGN UP. PLEASE, FILL IN ALL REQUIRED INFORMATION !";
         }
         else
         {
             $customerModel = $this->model("CustomerModel");
-            $resAddCustomerToDB = $customerModel->addCustomer($customer);
-            if($resAddCustomerToDB)
+            //check if username is duplicate
+            $checkDuplicatedUsername = $customerModel->getCustomerByUsername($customer['username_signup']);
+            if(mysqli_num_rows($checkDuplicatedUsername)==0)
             {
-                echo "SIGNED UP SUCCESSFULLY!";
+                $resAddCustomerToDB = $customerModel->addCustomer($customer);
+                if($resAddCustomerToDB)
+                {
+                    $_SESSION['signup'] = "SIGNED UP SUCCESSFULLY!!!";
+                }
+                else
+                {
+                    $_SESSION['signup'] = "FAILED TO SIGN UP. ERROR WHEN INSERT NEW CUSTOMER TO DATABASE!";
+                }
             }
             else
             {
-                echo "FAILED TO SIGN UP!";
+                $_SESSION['signup'] = "USERNAME IS DUPLICATED. PLEASE, TRY ANOTHER USERNAME!";
             }
+            
         }
 
     }
