@@ -321,6 +321,67 @@ class Home extends Controller
         }
     }
 
+    public function UpdateCustomerInfo()
+    {
+        $cusID = $_SESSION['id'];
+        $cusInfo = array("id", "fname", "lname", "email", "phone");
+        $cusInfoValues = array();
+        foreach($cusInfo as $attribute) {
+            $cusInfoValues[] = isset($_POST[$attribute]) ? $_POST[$attribute] : "";
+        }
+        //all attributes of book is saved in $book
+        $cusInfo = array_combine($cusInfo, $cusInfoValues);
+        $cusInfo["id"] = $cusID;
+        //print_r($cusInfo);
+        $customerModel = $this->model("CustomerModel");
+        $resUpdateCusInfo = $customerModel->updateCusInfoByID($cusInfo);
+        if($resUpdateCusInfo)
+        {
+            $_SESSION['update_cus_info'] = "UPDATED CUSTOMER INFORMATION SUCCESSFULLY!";
+        }
+        else
+        {
+            $_SESSION['update_cus_info'] = "FAILED TO UPDATE CUSTOMER INFORMATION!";
+        }
+    }
+
+    public function UpdateCustomerAccount()
+    {
+        $cusID = $_SESSION['id'];
+        $cusAccount = array("id", "password");
+        $cusAccountValues = array();
+        foreach($cusAccount as $attribute) {
+            $cusAccountValues[] = isset($_POST[$attribute]) ? $_POST[$attribute] : "";
+        }
+        //all attributes of book is saved in $book
+        $cusAccount = array_combine($cusAccount, $cusAccountValues);
+        $cusAccount["id"] = $cusID;
+        //print_r($cusAccount);
+
+        $resUpdateCusAccount = $customerModel->updateCusAccountByID($cusAccount);
+        if($resUpdateCusAccount)
+        {
+            $_SESSION['update_cus_account'] = "UPDATED CUSTOMER ACCOUNT SUCCESSFULLY!";
+            return True;
+        }
+        else
+        {
+            $_SESSION['update_cus_account'] = "FAILED TO UPDATE CUSTOMER ACCOUNT!";
+            return False;
+        }
+    }
+
+    public function checkDuplicateUsername()
+    {
+        $username = $_GET["username"];
+
+        $customerModel = $this->model("CustomerModel");
+        $resCheckDuplicateUsername = $customerModel->getCustomerByUsername($username);
+        if(mysqli_num_rows($resCheckDuplicateUsername)==0) return True;
+        else return False;
+    }
+
+
 }
 
 ?>

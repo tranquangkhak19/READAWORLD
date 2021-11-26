@@ -63,5 +63,30 @@ class CustomerModel extends DB
         VALUES ('$id', '$username', '$password', '$phone', '$email', '$fname', '$lname');";
         return mysqli_query($this->conn, $sql);
     }
+
+    public function updateCusInfoByID($cusInfo)
+    {
+        $id = $cusInfo["id"];
+        $fname = $cusInfo["fname"];
+        $lname = $cusInfo["lname"];
+        $email = $cusInfo["email"];
+        $phone = $cusInfo["phone"];
+
+        $sql = "UPDATE customer
+                SET fname='$fname', lname='$lname', email='$email', phone='$phone'
+                WHERE id='$id';";
+        return mysqli_query($this->conn, $sql);
+    }
+
+    public function updateCusAccountByID($cusAccount)
+    {
+        $id = $cusAccount["id"];
+        $password = $cusAccount["password"];
+
+        $sql = "UPDATE customer
+                SET pwd='$password'
+                WHERE id='$id';";
+        return mysqli_query($this->conn, $sql);
+    }
 }
 ?>
