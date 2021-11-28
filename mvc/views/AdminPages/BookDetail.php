@@ -16,7 +16,7 @@
 <div class="container">
   <a href="Book" class="btn btn-primary mb-3">Back</a>
 
-  <div class="row">
+  <div class="row border border-dark rounded m-1 p-2">
     <div class="col-4">
         <img src="<?php echo $image_url; ?>" class="img-fluid                                                                                                " alt="IMAGE">
     </div>

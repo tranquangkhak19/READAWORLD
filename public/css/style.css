@@ -1,3 +1,63 @@
 ul li a:link{
   text-decoration: none !important;
 }
+
+/* ----------Start style for Header---------- */
+/* Style The Dropdown Button */
+.dropbtn {
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  border: 1px solid black;
+  border-radius: 5px;
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  border-radius: 5px;
+  background-color: #5bc0de;
+}
+
+.dropdown-content a:nth-child(2):hover {
+  border-radius: 5px;
+  background-color: #f0ad4e;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+li .nav-link:hover{
+  background-color: #0275d8;
+  border-radius: 5px;
+}
+/* ----------End style for Header---------- */
+

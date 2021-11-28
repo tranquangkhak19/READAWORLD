@@ -12,12 +12,14 @@
 
 <style>
     .card-img-top {
-    width: 15vw;
-    height: 100%;
-    object-fit: cover;
+        height: 400px;
+        object-fit: cover;
     }
     .card-img-top:hover {
         background-color: rgba(251, 251, 251, 0.2);
+    }
+    .card-header-img{
+        height: 300px;
     }
 </style>
 
@@ -41,10 +43,14 @@
 
                 echo
                 '
-                    <div class="col-3">
-                        <div class="card" style="width:14rem;">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card p-3 border bg-light h-100">
                             <a href="BookDetail?isbn='.$isbn.'">
-                                <img class="card-img-top bg-image hover-zoom" style="height:300px; width:100%;" src="'.$image_url.'" alt="Image">
+                                <img
+                                    src="'.$image_url.'"
+                                    class="card-img-top"
+                                    alt="'.$isbn.'"
+                                />
                             </a>
                             <div class="card-body">
                                 <a href="BookDetail?isbn='.$isbn.'" style="text-decoration: none;">

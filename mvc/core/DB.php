@@ -6,7 +6,7 @@ class DB
     protected $server = "localhost";
     protected $username = "root";
     protected $password = "";
-    protected $database = "ebookstore";
+    protected $database = "readaworld";
 
     function __construct()
     {

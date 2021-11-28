@@ -12,6 +12,22 @@ class Home extends Controller
         ]);
     }
 
+    public function AboutUs()
+    {
+        $this->view("GuestLayout", [
+            "page" => "AboutUs",
+
+        ]);
+    }
+
+    public function ContactUs()
+    {
+        $this->view("GuestLayout", [
+            "page" => "ContactUs",
+
+        ]);
+    }
+
     public function Signup()
     {
         $this->view("GuestLayout", [
@@ -86,8 +102,16 @@ class Home extends Controller
 
     public function Login()
     {
-        $this->view("Login", []);
+        $this->view("GuestLayout", [
+            "page" => "Login",
+        ]);
     }
+
+    public function CheckIsLogin()
+    {
+        return (isset($_SESSION['id']) && isset($_SESSION['username']));
+    }
+
     
     public function Logout()
     {
@@ -137,7 +161,7 @@ class Home extends Controller
 
     public function Account()
     {
-        if(isset($_SESSION['id']))
+        if($this->CheckIsLogin())
         {
             $cid = $_SESSION['id'];
             $customerModel = $this->model("CustomerModel");
@@ -148,11 +172,15 @@ class Home extends Controller
                 "customer" => $customer
             ]);
         }
+        else
+        {
+            $this->Login();
+        }
     }
 
     public function Cart()
     {
-        if(isset($_SESSION['id']))
+        if($this->CheckIsLogin())
         {
             $cid = $_SESSION['id'];
             $model = $this->model("BookModel");
@@ -197,67 +225,92 @@ class Home extends Controller
             ]);
 
         }
+        else
+        {
+            $this->Login();
+        }
     }
 
     public function AddToCart()
     {
-        $cusID = $_SESSION['id'];
-        $isbn = $_POST['isbn'];
-        $quantity = $_POST['quantity'];
-
-        //echo $cusID."---".$isbn."---".$quantity."<br>";
-        $cartModel = $this->model("CartModel");
-
-        $resGetBook = $cartModel->getBookOnCartByISBN($cusID, $isbn);
-        $numBook = mysqli_num_rows($resGetBook);
-
-        if($numBook==1)
+        if($this->CheckIsLogin())
         {
-            echo "UPDATE <br>";
-            $resUpdateQuantity = $cartModel->updateQuantityBookInCart($cusID, $isbn, $quantity);
-        }
-        elseif($numBook==0)
-        {
-            echo "INSERT <br>";
-            $resAddToCart = $cartModel->addBookToCart($cusID, $isbn, $quantity);
-            //Update SESSION to display Cart icon on header
-            $_SESSION['numbooks'] += 1;
+            $cusID = $_SESSION['id'];
+            $isbn = $_POST['isbn'];
+            $quantity = $_POST['quantity'];
+
+            //echo $cusID."---".$isbn."---".$quantity."<br>";
+            $cartModel = $this->model("CartModel");
+
+            $resGetBook = $cartModel->getBookOnCartByISBN($cusID, $isbn);
+            $numBook = mysqli_num_rows($resGetBook);
+
+            if($numBook==1)
+            {
+                echo "UPDATE <br>";
+                $resUpdateQuantity = $cartModel->updateQuantityBookInCart($cusID, $isbn, $quantity);
+            }
+            elseif($numBook==0)
+            {
+                echo "INSERT <br>";
+                $resAddToCart = $cartModel->addBookToCart($cusID, $isbn, $quantity);
+                //Update SESSION to display Cart icon on header
+                $_SESSION['numbooks'] += 1;
+            }
+            else
+            {
+                echo "ERROR ADD TO CART!!!";
+            }
         }
         else
         {
-            echo "ERROR ADD TO CART!!!";
+            $this->Login();
         }
     }
 
     public function UpdateBookQuantityInCart()
     {
-        $cusID = $_SESSION['id'];
-        $isbn = $_POST['isbn'];
-        $quantity = $_POST['quantity'];
-
-        $cartModel = $this->model("CartModel");
-
-        $resGetBook = $cartModel->getBookOnCartByISBN($cusID, $isbn);
-        $numBook = mysqli_num_rows($resGetBook);
-
-        if($numBook==1)
+        if($this->CheckIsLogin())
         {
-            echo "UPDATE <br>";
-            $resUpdateQuantity = $cartModel->replaceQuantityBookInCart($cusID, $isbn, $quantity);
+            $cusID = $_SESSION['id'];
+            $isbn = $_POST['isbn'];
+            $quantity = $_POST['quantity'];
+
+            $cartModel = $this->model("CartModel");
+
+            $resGetBook = $cartModel->getBookOnCartByISBN($cusID, $isbn);
+            $numBook = mysqli_num_rows($resGetBook);
+
+            if($numBook==1)
+            {
+                echo "UPDATE <br>";
+                $resUpdateQuantity = $cartModel->replaceQuantityBookInCart($cusID, $isbn, $quantity);
+            }
+            else
+            {
+                echo "FAILED TO UPDATE QUANTITY OF BOOK IN CART!";
+            }
         }
         else
         {
-            echo "FAILED TO UPDATE QUANTITY OF BOOK IN CART!";
+            $this->Login();
         }
     }
 
     public function DeleteBookInCart()
     {
-        $cusID = $_SESSION['id'];
-        $isbn = $_POST['isbn'];
+        if($this->CheckIsLogin())
+        {
+            $cusID = $_SESSION['id'];
+            $isbn = $_POST['isbn'];
 
-        $cartModel = $this->model("CartModel");
-        $resDeleteBookInCart = $cartModel->deleteBookByCusIDAndISBN($cusID, $isbn);
+            $cartModel = $this->model("CartModel");
+            $resDeleteBookInCart = $cartModel->deleteBookByCusIDAndISBN($cusID, $isbn);
+        }
+        else
+        {
+            $this->Login();
+        }
     }
     
     public function BookDetail($isbn)
@@ -323,65 +376,83 @@ class Home extends Controller
 
     public function UpdateCustomerInfo()
     {
-        $cusID = $_SESSION['id'];
-        $cusInfo = array("id", "fname", "lname", "email", "phone");
-        $cusInfoValues = array();
-        foreach($cusInfo as $attribute) {
-            $cusInfoValues[] = isset($_POST[$attribute]) ? $_POST[$attribute] : "";
-        }
-        //all attributes of book is saved in $book
-        $cusInfo = array_combine($cusInfo, $cusInfoValues);
-        $cusInfo["id"] = $cusID;
-        //print_r($cusInfo);
-        $customerModel = $this->model("CustomerModel");
-        $resUpdateCusInfo = $customerModel->updateCusInfoByID($cusInfo);
-        if($resUpdateCusInfo)
+        if($this->CheckIsLogin())
         {
-            $_SESSION['update_cus_info'] = "UPDATED CUSTOMER INFORMATION SUCCESSFULLY!";
+            $cusID = $_SESSION['id'];
+            $cusInfo = array("id", "fname", "lname", "email", "phone");
+            $cusInfoValues = array();
+            foreach($cusInfo as $attribute) {
+                $cusInfoValues[] = isset($_POST[$attribute]) ? $_POST[$attribute] : "";
+            }
+            //all attributes of book is saved in $cusInfo
+            $cusInfo = array_combine($cusInfo, $cusInfoValues);
+            $cusInfo["id"] = $cusID;
+            //print_r($cusInfo);
+            $customerModel = $this->model("CustomerModel");
+            $resUpdateCusInfo = $customerModel->updateCusInfoByID($cusInfo);
+            if($resUpdateCusInfo)
+            {
+                $_SESSION['update_cus_info'] = "UPDATED CUSTOMER INFORMATION SUCCESSFULLY!";
+            }
+            else
+            {
+                $_SESSION['update_cus_info'] = "FAILED TO UPDATE CUSTOMER INFORMATION!";
+            }
         }
         else
         {
-            $_SESSION['update_cus_info'] = "FAILED TO UPDATE CUSTOMER INFORMATION!";
+            $this->Login();
         }
     }
 
     public function UpdateCustomerAccount()
     {
-        $cusID = $_SESSION['id'];
-        $cusAccount = array("id", "password");
-        $cusAccountValues = array();
-        foreach($cusAccount as $attribute) {
-            $cusAccountValues[] = isset($_POST[$attribute]) ? $_POST[$attribute] : "";
-        }
-        //all attributes of book is saved in $book
-        $cusAccount = array_combine($cusAccount, $cusAccountValues);
-        $cusAccount["id"] = $cusID;
-        //print_r($cusAccount);
-
-        $resUpdateCusAccount = $customerModel->updateCusAccountByID($cusAccount);
-        if($resUpdateCusAccount)
+        if($this->CheckIsLogin())
         {
-            $_SESSION['update_cus_account'] = "UPDATED CUSTOMER ACCOUNT SUCCESSFULLY!";
-            return True;
+            $cusID = $_SESSION['id'];
+            $cusAccount = array("id", "password");
+            $cusAccountValues = array();
+            foreach($cusAccount as $attribute) {
+                $cusAccountValues[] = isset($_POST[$attribute]) ? $_POST[$attribute] : "";
+            }
+            //all attributes of book is saved in $book
+            $cusAccount = array_combine($cusAccount, $cusAccountValues);
+            $cusAccount["id"] = $cusID;
+            //print_r($cusAccount);
+
+            $resUpdateCusAccount = $customerModel->updateCusAccountByID($cusAccount);
+            if($resUpdateCusAccount)
+            {
+                $_SESSION['update_cus_account'] = "UPDATED CUSTOMER ACCOUNT SUCCESSFULLY!";
+                return True;
+            }
+            else
+            {
+                $_SESSION['update_cus_account'] = "FAILED TO UPDATE CUSTOMER ACCOUNT!";
+                return False;
+            }
         }
         else
         {
-            $_SESSION['update_cus_account'] = "FAILED TO UPDATE CUSTOMER ACCOUNT!";
-            return False;
+            $this->Login();
         }
     }
 
     public function checkDuplicateUsername()
     {
-        $username = $_GET["username"];
-
-        $customerModel = $this->model("CustomerModel");
-        $resCheckDuplicateUsername = $customerModel->getCustomerByUsername($username);
-        if(mysqli_num_rows($resCheckDuplicateUsername)==0) return True;
-        else return False;
+        if($this->CheckIsLogin())
+        {
+            $username = $_GET["username"];
+            $customerModel = $this->model("CustomerModel");
+            $resCheckDuplicateUsername = $customerModel->getCustomerByUsername($username);
+            if(mysqli_num_rows($resCheckDuplicateUsername)==0) return True;
+            else return False;
+        }
+        else
+        {
+            $this->Show();
+        }
     }
-
-
 }
 
 ?>

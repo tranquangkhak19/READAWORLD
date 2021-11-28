@@ -10,14 +10,15 @@
     <title>READAWORLD</title>
 </head>
 <body class="m-0">
-    <?php require_once "./mvc/views/blocks/Header.php";?>
+    <?php require_once "./mvc/views/blocks/AdminHeader.php";?>
     <div class="m-3">
         
         <?php
             if(empty($data))
             {
                 echo 
-                '
+                '   
+                    <h1 class="text-primary text-center">WELLCOME TO ADMIN PAGE</h1>
                     <div class="row" id="#board">
                         <div class="col p-5 m-2 bg-primary rounded">Total Members</div>
                         <div class="col p-5 m-2 bg-primary rounded">Total Books</div>

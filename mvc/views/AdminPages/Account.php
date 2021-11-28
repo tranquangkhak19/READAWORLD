@@ -1,14 +1,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <?php
-    $customer = $data['customer'];
-    $id = $customer['ID'];
-    $username = $customer['USERNAME'];
-    $password = $customer['PWD'];
-    $phone = $customer['PHONE'];
-    $email = $customer['EMAIL'];
-    $fname = $customer['FNAME'];
-    $lname = $customer['LNAME'];
+    $admin = $data['admin'];
+    $id = $admin['ID'];
+    $username = $admin['USERNAME'];
+    $password = $admin['PWD'];
+    $phone = $admin['PHONE'];
+    $email = $admin['EMAIL'];
+    $fname = $admin['FNAME'];
+    $lname = $admin['LNAME'];
 ?>
 
 <div class="container">
@@ -42,30 +42,6 @@
                                     </div>
                                     <div class="col-sm-10 text-secondary">
                                         My Notifications
-                                    </div>
-								</li>
-								<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                    <div class="col-sm-2">
-                                        <i class="fas fa-tasks"></i>
-                                    </div>
-                                    <div class="col-sm-10 text-secondary">
-                                        Manage my orders
-                                    </div>
-								</li>
-								<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                    <div class="col-sm-2">
-                                        <i class="fas fa-credit-card"></i>
-                                    </div>
-                                    <div class="col-sm-10 text-secondary">
-                                        My payment information
-                                    </div>
-								</li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                    <div class="col-sm-2">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                    <div class="col-sm-10 text-secondary">
-                                        My Cart
                                     </div>
 								</li>
                             </ul>
@@ -193,16 +169,16 @@
 			
 			if(cur_fname==new_fname && cur_lname==new_lname && cur_email==new_email && cur_phone==new_phone)
 			{
-				alert("NO CUSTOMER INFORMATION HAS BEEN CHANGED!");
+				alert("NO ADMIN INFORMATION HAS BEEN CHANGED!");
 			}
 			else
 			{
 				$.ajax({
-					url: "UpdateCustomerInfo",
+					url: "UpdateAdminInfo",
 					type: "POST",
 					data: {fname:new_fname, lname:new_lname, email:new_email, phone:new_phone},
 					success:function(){
-						alert("UPDATE CUSTOMER INFORMATION SUCCESSFULLLY!");
+						alert("UPDATE ADMIN INFORMATION SUCCESSFULLLY!");
 						cur_fname = new_fname;
 						cur_lname = new_lname;
 						cur_email = new_email;

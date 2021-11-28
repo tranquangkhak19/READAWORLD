@@ -1,3 +1,4 @@
+<!-- This layout for everyone who hasn't logged in to the system -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,7 @@
     <?php require_once "./mvc/views/blocks/Header.php";?>
     <div class="container-fluid mt-3">
         <div class="row">
-            <div class="col-2" id="filter">
+            <div class="col-lg-2 col-md-12 col-sm-12" id="filter">
                 <?php require_once "./mvc/views/blocks/Filter.php";?>
             </div>
             <div class="col-10" id="list-books">

@@ -13,15 +13,15 @@
   $description = $row['description'];
 ?>
 
-<div class="container my-4">
+<div class="container my-4 ">
   <a href="Show" class="btn btn-primary mb-3">Back</a>
 
-  <div class="row">
+  <div class="row py-3 m-1 border border-dark rounded">
     <div class="col-4">
         <img src="<?php echo $image_url; ?>" class="img-fluid                                                                                                " alt="IMAGE">
     </div>
 
-    <div class="col-8">
+    <div class="col-8 ">
         <div class="row d-none" id="isbn"><?php echo $isbn; ?></div>
         <div class="row"><h2><?php echo $title; ?></h2></div>
         <div class="row"><p>Author: <?php echo $author_name; ?></p></div>

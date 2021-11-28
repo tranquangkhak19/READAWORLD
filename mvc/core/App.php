@@ -9,10 +9,16 @@ class App
     function __construct()
     {
         $arr = $this->UrlProcess();
-        
-        //avoid warning "Trying to access array offset on value of type null"
-        if(!empty($arr))
+        //echo gettype($arr);
+        if(empty($arr) || (!empty($arr)&&count($arr)!=2))
         {
+            header("Location: http://localhost/READAWORLD/Home/Show");
+            //die();
+        }
+        //avoid warning "Trying to access array offset on value of type null"
+        elseif(!empty($arr) && count($arr)==2 )
+        {
+            //echo count($arr);
             //Handling Controller
             if(file_exists("./mvc/controllers/".$arr[0].".php"))
             {
@@ -52,8 +58,10 @@ class App
         //$_GET['url'] not return query components
         if(isset($_GET["url"]))
         {
-            return explode("/", filter_var(trim($_GET["url"], "/")));
+            $arr = explode("/", filter_var(trim($_GET["url"], "/")));
+            return $arr;
         }
+
     }
 
     function getParams()

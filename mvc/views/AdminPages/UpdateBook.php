@@ -18,20 +18,23 @@
 <div class="container">
     <a href="Book" class="btn btn-primary mb-3">Back</a>
     <div class="row">
-        <div class="col-2">
-            <img src="<?php echo $image_url; ?>" class="img-fluid                                                                                                " alt="IMAGE">
+        <div class="col-lg-6 col-md-11 col-sm-11 border border-dark rounded m-3 p-2">
+            <div class="row">
+                <div class="col-6">
+                    <img src="<?php echo $image_url; ?>" class="img-fluid                                                                                                " alt="IMAGE">
+                </div>
+                <div class="col-6">
+                    <div class="row"><h2><?php echo $title; ?></h2></div>
+                    <div class="row"><p>Author: <?php echo $author_name; ?></p></div>
+                    <div class="row"><p>Publisher: <?php echo $publisher; ?></p></div>
+                    <div class="row"><p>Desciption: <?php echo $description; ?></p></div>
+                    <div class="row"><p>Price: <?php echo $price; ?> VND</p></div>
+                </div>
+            </div>
         </div>
 
-        <div class="col-4">
-        <div class="row"><h2><?php echo $title; ?></h2></div>
-        <div class="row"><p>Author: <?php echo $author_name; ?></p></div>
-        <div class="row"><p>Publisher: <?php echo $publisher; ?></p></div>
-        <div class="row"><p>Desciption: <?php echo $description; ?></p></div>
-        <div class="row"><p>Price: <?php echo $price; ?> VND</p></div>
-        </div>
-
-        <div class="col-6">
-            <h2>Update your book here</h2>
+        <div class="col-lg-5 col-md-11 col-sm-11 border border-dark rounded m-3 p-2">
+            <h2 class="text-danger">Update your book here</h2>
 
             <form method="post" action="UpdateBookToDB?isbn=<?php echo $isbn; ?>">
             <div class="form-group">
