@@ -32,7 +32,7 @@
                       '
                         <a href="Cart" class="btn btn-outline-light me-2">
                           <i class="fas fa-shopping-cart"></i> 
-                          (<b id="numbooks_icon">'.$numbooks.'</b>)
+                          
                         </a>
                         <div class="dropdown">
                           <button class="dropbtn btn btn-outline-light"><i class="fas fa-user"></i> '.$username.'</button>
