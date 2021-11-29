@@ -88,5 +88,11 @@ class CustomerModel extends DB
                 WHERE id='$id';";
         return mysqli_query($this->conn, $sql);
     }
+
+    public function deleteCustomerByID($id)
+    {
+        $sql = "DELETE FROM customer WHERE id='$id';";
+        return mysqli_query($this->conn, $sql);
+    }
 }
 ?>

@@ -41,9 +41,8 @@
                           <td><?php echo $fname; ?></td>
                           <td><?php echo $lname; ?></td>
                           <td>
-                              <a href="" class="btn btn-sm btn-primary">Detail</a>
-                              <a href="UpdateCustomer" class="btn btn-sm btn-secondary">Update</a>
-                              <a href="" class="btn btn-sm btn-danger">Delete</a>
+                              <a href="CustomerDetail?id=<?php echo $id;?>" class="btn btn-sm btn-primary">Detail</a>
+                              <a href="DeleteCustomer?id=<?php echo $id;?>" class="btn btn-sm btn-danger">Delete</a>
                           </td>
                       </tr>
 

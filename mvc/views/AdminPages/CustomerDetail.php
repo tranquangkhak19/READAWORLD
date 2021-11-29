@@ -1,14 +1,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <?php
-    $admin = $data['admin'];
-    $id = $admin['ID'];
-    $username = $admin['USERNAME'];
-    $password = $admin['PWD'];
-    $phone = $admin['PHONE'];
-    $email = $admin['EMAIL'];
-    $fname = $admin['FNAME'];
-    $lname = $admin['LNAME'];
+    $customer = $data['customer'];
+    $id = $customer['ID'];
+    $username = $customer['USERNAME'];
+    $password = $customer['PWD'];
+    $phone = $customer['PHONE'];
+    $email = $customer['EMAIL'];
+    $fname = $customer['FNAME'];
+    $lname = $customer['LNAME'];
 ?>
 
 <div class="container">
@@ -30,18 +30,18 @@
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                     <div class="col-sm-2">
-                                        <i class="fas fa-user"></i>
+                                        <i class="fas fa-tasks"></i>
                                     </div>
                                     <div class="col-sm-10 text-secondary">
-                                        My Account
+                                        User's orders
                                     </div>
 								</li>
 								<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                     <div class="col-sm-2">
-                                        <i class="fas fa-bell"></i>
+                                        <i class="fas fa-credit-card"></i>
                                     </div>
                                     <div class="col-sm-10 text-secondary">
-                                        My Notifications
+                                        Payment information
                                     </div>
 								</li>
                             </ul>
@@ -52,100 +52,50 @@
 
 					<div class="card">
 						<div class="card-body">
-                            <h5 class="card-title text-center mb-4">INFORMATION</h5>
+                            <h5 class="card-title text-center text-primary mb-4">CUSTOMER INFORMATION</h5>
 							<div class="row mb-3">
 								<div class="col-sm-3">
 									<h6 class="mb-0">First Name</h6>
 								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" id="fname" class="form-control" value="<?php echo $fname; ?>">
+								<div class="col-sm-9">
+									<p><?php echo $fname;?></p>
 								</div>
 							</div>
                             <div class="row mb-3">
 								<div class="col-sm-3">
 									<h6 class="mb-0">Last Name</h6>
 								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" id="lname" class="form-control" value="<?php echo $lname; ?>">
+								<div class="col-sm-9">
+									<p><?php echo $lname;?></p>
 								</div>
 							</div>
 							<div class="row mb-3">
 								<div class="col-sm-3">
 									<h6 class="mb-0">Email</h6>
 								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" id="email" class="form-control" value="<?php echo $email; ?>">
+								<div class="col-sm-9">
+									<p><?php echo $email;?></p>
 								</div>
 							</div>
 							<div class="row mb-3">
 								<div class="col-sm-3">
 									<h6 class="mb-0">Phone</h6>
 								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" id="phone" class="form-control" value="<?php echo $phone; ?>">
+								<div class="col-sm-9">
+									<p><?php echo $phone;?></p>
 								</div>
 							</div>
 							<div class="row mb-3">
 								<div class="col-sm-3">
 									<h6 class="mb-0">Address</h6>
 								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="In your heart <3">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-3"></div>
-								<div class="col-sm-9 text-secondary">
-									<input type="button" id="update_info" class="btn btn-primary px-4" value="Save changes">
+								<div class="col-sm-9">
+									<p>District 3, HCM City, VietNam</p>
 								</div>
 							</div>
 						</div>
 					</div>
-                    <div class="card mt-4">
-						<div class="card-body">
-                            <h5 class="card-title text-center mb-4">ACCOUNT</h5>
-							<p class="text-danger">Note: If you want to change account information, you must retype the current password correctly.</p>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Username</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<h6 id="username"><?php echo $username; ?></h6>
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Current Password</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" id="cur_password" class="form-control" value="" placeholder="Type your current password" required>
-								</div>
-							</div>
-                            <div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">New Password</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" id="new_password" class="form-control" value="" placeholder="Type your new password">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Retype New Password</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" id="new_password2" class="form-control" value="" placeholder="Retype your new password">
-								</div>
-							</div>
-							
-							<div class="row">
-								<div class="col-sm-3"></div>
-								<div class="col-sm-9 text-secondary">
-									<input type="button" id="update_account" class="btn btn-primary px-4" value="Save changes">
-								</div>
-							</div>
-						</div>
-					</div>
+                   
 				</div>
 			</div>
 		</div>
@@ -169,16 +119,16 @@
 			
 			if(cur_fname==new_fname && cur_lname==new_lname && cur_email==new_email && cur_phone==new_phone)
 			{
-				alert("NO ADMIN INFORMATION HAS BEEN CHANGED!");
+				alert("NO CUSTOMER INFORMATION HAS BEEN CHANGED!");
 			}
 			else
 			{
 				$.ajax({
-					url: "UpdateAdminInfo",
+					url: "UpdateCustomerInfo",
 					type: "POST",
 					data: {fname:new_fname, lname:new_lname, email:new_email, phone:new_phone},
 					success:function(){
-						alert("UPDATE ADMIN INFORMATION SUCCESSFULLLY!");
+						alert("UPDATE CUSTOMER INFORMATION SUCCESSFULLLY!");
 						cur_fname = new_fname;
 						cur_lname = new_lname;
 						cur_email = new_email;
@@ -217,7 +167,7 @@
 				else
 				{
 					$.ajax({
-						url: "UpdateAdminAccount",
+						url: "UpdateCustomerAccount",
 						type: "POST",
 						data: {password:new_pasword_encrypt},
 						success:function(response){

@@ -377,6 +377,42 @@ class Admin extends Controller
         }
     }
 
+    public function CustomerDetail($id)
+    {
+        if($this->CheckIsLogin())
+        {
+            $customerModel = $this->model("CustomerModel");
+            $resCustomer = $customerModel->getCustomeById($id);
+            $customer = mysqli_fetch_assoc($resCustomer);
+            $this->view("AdminLayout", [
+                "page" => "CustomerDetail",
+                "customer" => $customer
+            ]);
+        }
+        else
+        {
+            $this->Login();
+        }
+    }
+
+    public function DeleteCustomer($id)
+    {
+        if($this->CheckIsLogin())
+        {
+            $model = $this->model("CustomerModel");
+            $res = $model->deleteCustomerByID($id);
+            if($res){
+                //$_SESSION['delete'] = "DELETED BOOK SUCCESSFULLY!";
+                header('Location:Customer');
+            }
+        }
+        else
+        {
+            $this->Login();
+        }
+    }
+    
+
 }
 
 ?>
